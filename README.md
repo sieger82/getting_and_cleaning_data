@@ -1,7 +1,7 @@
 # Getting and cleaning data course project
 Course project for the Getting and Cleaning coursera course
 
-The files in this repository are inteded to be used with the smartphone dataset from the course project website.
+The files in this repository are intended to be used with the smartphone dataset from the course project website.
 
 To create a tidy dataset using the script `run_analysis.R` from this repo, the dataset needs to be present in the current R working directory as 'getdata-projectfiles-UCI HAR Dataset.zip'.
 
