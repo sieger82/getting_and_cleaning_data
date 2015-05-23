@@ -3,12 +3,11 @@
 # unzip the raw data package
 unzip("getdata-projectfiles-UCI HAR Dataset.zip")
 
-# read the features variable names into data frame
+# read the features variable names into a data frame
 features <- read.table("UCI HAR Dataset//features.txt")
 
 # read the training data into a data frame using column names from features data frame
 Xdata <- read.table("UCI HAR Dataset//train//X_train.txt", col.names=features[,2])
-
 # append the test data 
 Xdata <- rbind(Xdata, read.table("UCI HAR Dataset//test//X_test.txt", col.names=features[,2]))
 
@@ -17,7 +16,6 @@ activities <- read.table("UCI HAR Dataset//activity_labels.txt", col.names=c("ID
 
 # read the activity data of the training set info data frame
 Ydata <- read.table("UCI HAR Dataset//train//y_train.txt", col.names="Activity")
-
 # append the test data
 Ydata <- rbind(Ydata, read.table("UCI HAR Dataset//test//y_test.txt", col.names="Activity"))
 
