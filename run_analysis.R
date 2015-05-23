@@ -1,4 +1,5 @@
 # this script reads the raw UCI HAR data packes and creates one single clean data set
+# NB: needs the file: getdata-projectfiles-UCI HAR Dataset.zip in the current working directory
 
 # unzip the raw data package
 unzip("getdata-projectfiles-UCI HAR Dataset.zip")
@@ -30,12 +31,17 @@ subjectData <- rbind(subjectData, read.table("UCI HAR Dataset//test//subject_tes
                                              col.names="Subject.ID"))
 
 # add everything into a single data frame
-# include only mean and std measurements
-cleanDataSet <- Xdata[grep("mean|std", colnames(Xdata))]
+# include only mean() and std() measurements
+cleanDataSet <- Xdata[grep("mean\\.\\.|std\\.\\.", colnames(Xdata), perl=TRUE)]
 # add subject IDs and activity factors as first 2 columns in the dataset
 cleanDataSet <- cbind(Subject.ID = subjectData$Subject.ID, 
                       Activity = Ydata$Description, 
                       cleanDataSet) 
+# clean the column names a bit (remove .. and ...)
+names(cleanDataSet) <- sub("\\.\\.|\\.\\.\\.", ".", names(cleanDataSet))
+
+# convert the Subject.ID to factors
+cleanDataSet$Subject.ID <- factor(cleanDataSet$Subject.ID)
 
 # write the tidy dataset to a file on disk
 write.table(cleanDataSet, "tidy_UCI_HAR_Dataset.txt", row.name=FALSE)
